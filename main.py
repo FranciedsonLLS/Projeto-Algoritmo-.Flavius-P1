@@ -2,39 +2,62 @@ def exibir_menu():
     print("\n=== MENU BIBLIOTECA PESSOAL ===")
     print("1. Gerenciar Clientes")
     print("2. Gerenciar Livros")
-    print("3. Registrar Venda/Aluguel")
+    print("3. Registrar Aluguel")
     print("4. Gerenciar Estoque")
     print("5. Sair")
 
 def menu_clientes():
-    print("\n--- MENU CLIENTES ---")
-    print("1. Cadastrar Cliente")
-    print("2. Listar Clientes")
-    print("3. Editar Cliente")
-    print("4. Remover Cliente")
-    print("5. Voltar")
+    while True:
+        print("\n--- MENU CLIENTES ---")
+        print("1. Cadastrar Cliente")
+        print("2. Listar Clientes")
+        print("3. Editar Cliente")
+        print("4. Remover Cliente")
+        print("5. Voltar")
+        opcao = input("Escolha uma opção: ")
+        if opcao == "5":
+            break
+        else:
+            print("Função ainda não implementada.")
 
 def menu_livros():
-    print("\n--- MENU LIVROS ---")
-    print("1. Cadastrar Livro")
-    print("2. Listar Livros")
-    print("3. Editar Livro")
-    print("4. Remover Livro")
-    print("5. Voltar")
+    while True:
+        print("\n--- MENU LIVROS ---")
+        print("1. Cadastrar Livro")
+        print("2. Listar Livros")
+        print("3. Editar Livro")
+        print("4. Remover Livro")
+        print("5. Voltar")
+        opcao = input("Escolha uma opção: ")
+        if opcao == "5":
+            break
+        else:
+            print("Função ainda não implementada.")
 
-def menu_transacoes():
-    print("\n--- MENU VENDAS/ALUGUÉIS ---")
-    print("1. Registrar Venda")
-    print("2. Registrar Aluguel")
-    print("3. Listar Transações")
-    print("4. Voltar")
+def menu_alugueis():
+    while True:
+        print("\n--- MENU ALUGUÉIS ---")
+        print("1. Registrar Aluguel")
+        print("2. Listar Aluguéis")
+        print("3. Voltar")
+        opcao = input("Escolha uma opção: ")
+        if opcao == "3":
+            break
+        else:
+            print("Função ainda não implementada.")
 
 def menu_estoque():
-    print("\n--- MENU ESTOQUE ---")
-    print("1. Adicionar Estoque de Livro")
-    print("2. Ver Estoque Atual")
-    print("3. Ajustar Quantidade")
-    print("4. Voltar")
+    while True:
+        print("\n--- MENU ESTOQUE ---")
+        print("1. Adicionar Estoque de Livro")
+        print("2. Ver Estoque Atual")
+        print("3. Ajustar Quantidade")
+        print("4. Voltar")
+        opcao = input("Escolha uma opção: ")
+        if opcao == "4":
+            break
+        else:
+            print("Função ainda não implementada.")
 
 def main():
     while True:
@@ -46,7 +69,7 @@ def main():
         elif opcao == "2":
             menu_livros()
         elif opcao == "3":
-            menu_transacoes()
+            menu_alugueis()
         elif opcao == "4":
             menu_estoque()
         elif opcao == "5":
