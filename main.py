@@ -4,108 +4,10 @@ from funcs.validacao import validaCPF
 from models.cliente import remover_cliente, editar_cliente, listar_clientes, add_cliente
 from models.livro import add_livro, listar_livros, editar_livro, remover_livro
 from models.aluguel import registrar_aluguel, listar_alugueis, registrar_devolucao, lista_historico #alterar funcs dps
+from funcs.bds import carregar_bd, salvar_bd
+import json
 import os
 
-
-clientes = {
-    "123.456.789-00": {
-        "nome": "Alice Martins",
-        "cpf": "123.456.789-00",
-        "endereco": "Rua das Flores, 123",
-        "telefone": "(11) 91234-5678"
-    },
-    "987.654.321-00": {
-        "nome": "Bruno Silva",
-        "cpf": "987.654.321-00",
-        "endereco": "Av. Paulista, 456",
-        "telefone": "(11) 99876-5432"
-    },
-    "111.222.333-44": {
-        "nome": "Carla Souza",
-        "cpf": "111.222.333-44",
-        "endereco": "Rua do Sol, 789",
-        "telefone": "(21) 91234-4321"
-    },
-    "555.666.777-88": {
-        "nome": "Diego Ramos",
-        "cpf": "555.666.777-88",
-        "endereco": "Travessa da Serra, 101",
-        "telefone": "(31) 98765-4321"
-    },
-    "999.888.777-66": {
-        "nome": "Eduarda Lima",
-        "cpf": "999.888.777-66",
-        "endereco": "Rua Verde, 202",
-        "telefone": "(71) 99988-7766"
-    }
-}
-
-livros = {
-    "1984": {
-        "nome": "1984",
-        "tema": "Distopia",
-        "autor": "George Orwell",
-        "quantidade": 3
-    },
-    "Dom Casmurro": {
-        "nome": "Dom Casmurro",
-        "tema": "Romance",
-        "autor": "Machado de Assis",
-        "quantidade": 5
-    },
-    "O Hobbit": {
-        "nome": "O Hobbit",
-        "tema": "Fantasia",
-        "autor": "J.R.R. Tolkien",
-        "quantidade": 2
-    },
-    "A Revolução dos Bichos": {
-        "nome": "A Revolução dos Bichos",
-        "tema": "Satírico/Político",
-        "autor": "George Orwell",
-        "quantidade": 4
-    },
-    "Memórias Póstumas de Brás Cubas": {
-        "nome": "Memórias Póstumas de Brás Cubas",
-        "tema": "Romance Filosófico",
-        "autor": "Machado de Assis",
-        "quantidade": 1
-    }
-}
-    # chave: NOME  ////// tirar chave de nome
-from datetime import date
-
-alugueis = {
-    1: {
-        "cliente_cpf": "123.456.789-00",
-        "livro_nome": "1984",
-        "data": str(date(2025, 7, 1)),
-        "status": "pendente"
-    },
-    2: {
-        "cliente_cpf": "987.654.321-00",
-        "livro_nome": "Dom Casmurro",
-        "data": str(date(2025, 6, 28)),
-        "status": "pendente"
-    },
-    3: {
-        "cliente_cpf": "111.222.333-44",
-        "livro_nome": "O Hobbit",
-        "data": str(date(2025, 7, 3)),
-        "status": "pendente"
-    },
-    4: {
-        "cliente_cpf": "123.456.789-00",
-        "livro_nome": "O Hobbit",
-        "data": str(date(2025, 7, 3)),
-        "status": "pendente"
-    }
-    
-}
-
-  # chave: ID
-historico = {} #chave: ID
-# historico = [] add depois
 
 #MENU
 def exibir_menu():
@@ -203,10 +105,20 @@ def menu_alugueis():
         else:
             print("Opção inválida.")
 
-# LISTAR ALUGUEL
+# CARREGAR DICIONARIOS
 
 # MAIN
 def main():
+    #variaveis globais momentaneas dentro do codigo
+    global clientes, livros, alugueis, historico
+    #carrega os dados dos arquivos
+    bd = carregar_bd()
+    #atribuindo os bds de cada txt nos dic do codigo
+    clientes = bd["clientes"]
+    livros = bd["livros"]
+    alugueis = bd["alugueis"]
+    historico = bd["historico"]
+
     while True:
         exibir_menu()
         opcao = input("Escolha uma opção: ")
@@ -216,13 +128,15 @@ def main():
         elif opcao == "2":
             menu_livros()
         elif opcao == "3":
-            #request #alugueis, livros e clientes
             menu_alugueis()
         elif opcao == "4":
-            print("Encerrando o programa.")
+            print("Encerrando o programa e salvando os dados!!!")
+            # Salvando os dados dos dic do codigos para os txts
+            salvar_bd(clientes, livros, alugueis, historico)
             break
         else:
             print("Opção inválida.")
+
 
 if __name__ == "__main__":
     main()
